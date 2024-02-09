@@ -1,0 +1,13 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "Silent-Push-Python-Library"
+version = "0.0.1" 
+
+[tool.pytest.ini_options]
+pythonpath = "silent-push"
+
+[tool.hatch.build.targets.wheel]
+packages = ["silent-push"]
