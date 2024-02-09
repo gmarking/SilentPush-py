@@ -1,4 +1,4 @@
-from silentpush.utils import API_ROOT
+from .utils import API_ROOT
 
 """Helpful functions to build Silent Push API request URLs"""
 

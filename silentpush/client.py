@@ -1,11 +1,11 @@
 import requests
 
-from silentpush.url_builder import (
+from .url_builder import (
     get_domain_information_request_url,
     get_ip_information_request_url,
 )
-from silentpush.utils import IPV4
-from silentpush.validators import validate_api_key, validate_domain, validate_ip_address
+from .utils import IPV4
+from .validators import validate_api_key, validate_domain, validate_ip_address
 
 
 class Client:

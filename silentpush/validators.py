@@ -1,6 +1,6 @@
 import ipaddress
 
-from silentpush.utils import IPV4, IPV6
+from .utils import IPV4, IPV6
 
 """Some helpful functions to validate arguments passed to client"""
 
