@@ -1,6 +1,7 @@
 import httpretty
 import pytest
-from client import Client
+
+from silentpush.client import Client
 
 """Client tests"""
 
