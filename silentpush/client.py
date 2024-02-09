@@ -11,11 +11,13 @@ from silentpush.validators import validate_api_key, validate_domain, validate_ip
 class Client:
     """Client for interacting with Silent Push Explore API.
 
-    PARAMETERS:
-    api_key str: Your Silent Push API key.
+    :param api_key: Your Silent Push API key.
+    :type api_key: str
+
+    :raises ValueError: If api_key is not a non-empty string.
     """
 
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str) -> None:
         """Initialize client using provided API key."""
 
         self.session = requests.Session()
@@ -27,16 +29,15 @@ class Client:
     def get_domain_information(self, domain: str) -> dict:
         """Sends a GET request to Silent Push Domain Information API endpoint.
 
-        PARAMETERS:
-        domain str: domain whos information is being requested
+        :param domain: Domain whos information is being requested.
+        :type domain: str
 
-        RETURNS:
-        A dictionary containing the Domain Information in JSON format.
+        :returns: A dictionary containing the Domain Information in JSON
+            format.
 
-        EXCEPTIONS:
-        ValueError: If passed domain is invalid
-        HTTPError: Thrown if any status code other than 200 is recieved
-        from the request.
+        :raises ValueError: If passed domain is invalid.
+        :raises HTTPError: Thrown if any status code other than 200 is recieved
+            from the request.
         """
 
         validate_domain(domain)
@@ -52,21 +53,17 @@ class Client:
     ) -> dict:
         """Sends a GET request to Silent Push IP information API endpoint.
 
-        PARAMETERS:
-        ip_addess str: ip address whos information is being requested
-        ip_type str: string specifying which type of ip address is being
-        passed with a default of ipv4
+        :param ip_addess: IP address whos information is being requested.
+        :param ip_type: Type of ip address being passed with a default of ipv4.
+        :param explain: Flag to indicate if we want to include
+            underlying data SP uses to calculate score.
 
-        explain bool: boolean flag to indicate if we want to include
-        underlying data SP uses to calculate score
+        :returns: A dictionary containing the ip address information in JSON
+            format.
 
-        RETURNS:
-        A dictionary containing the ip address information in JSON format.
-
-        EXCEPTIONS:
-        ValueError: If ip_address or ip_type is invalid.
-        HTTPError: Thrown if any status code other than 200 is recieved
-        from the request.
+        :raises ValueError: If ip_address or ip_type is invalid.
+        :raises HTTPError: Thrown if any status code other than 200 is recieved
+            from the request.
         """
 
         validate_ip_address(ip_address, ip_type)
