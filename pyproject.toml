@@ -4,8 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "silentpush"
-version = "0.1.0" 
+version = "0.0.2" 
 description = "Python Library to interact with SilentPush Explore API"
+authors = [
+    { name = "Garrett Marking", email = "markingcycles@gmail.com" },
+]
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
