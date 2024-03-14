@@ -1,6 +1,7 @@
 import requests
 
-from silentpush import url_builder, params_builder, utils, validators
+from silentpush import params_builder, url_builder, utils, validators
+
 
 class SilentPushExploreClient:
     """Client for interacting with Silent Push Explore API.
@@ -41,15 +42,25 @@ class SilentPushExploreClient:
             result.raise_for_status()
         return result.json()
 
-    def get_domain_infratag(self, 
-                            domain: str, 
-                            mode: str = "", 
-                            match: str = "", 
+    def get_domain_infratag(self,
+                            domain: str,
+                            mode: str = "",
+                            match: str = "",
                             as_of: str | int = "") -> dict:
         """Sends a GET request to Domain Infratag API endpoint.
 
         :param domain: Domain whos infratag is being requested.
+        :param mode: <live|padns> build infratags from live lookup data or from PADNS data
+        :param match: <self|full> handling of self-hosted infrastructure.
+        :param as_of: build infratags from padns data where the as_of timestamp
+            equivalent is between the first_seen and the last_seen timestamp. If passed as
+            a string, must be in iso date format. If passed as an int, can be passed in 
+            epoch time or as a negative int, relative time <sec> seconds ago. 
+
         :type domain: str
+        :type mode: str
+        :type match: str
+        :type as_of: str | int
 
         :returns: A dictionary containing the Domain infratag in JSON
             format.
@@ -66,7 +77,7 @@ class SilentPushExploreClient:
         if result.status_code != 200:
             result.raise_for_status()
         return result.json()
-    
+
     def get_domain_nameserver_changes(self, domain: str, summary: bool = False) -> dict:
         """Sends a GET request to Domain name server changes API endpoint.
 
@@ -100,7 +111,7 @@ class SilentPushExploreClient:
         :param ip_type: Type of ip address being passed with a default of ipv4.
         :param explain: Flag to indicate if we want to include
             underlying data SP uses to calculate score.
-        
+
         :type ip_address: str
         :type ip_type: str
         :type explain: bool

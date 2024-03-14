@@ -1,3 +1,4 @@
+import datetime
 import ipaddress
 
 from .utils import IPV4, IPV6
@@ -67,3 +68,23 @@ def validate_ip_address(ip_address: str, ip_type: str) -> None:
             ipaddress.IPv6Address(ip_address)
     except ipaddress.AddressValueError:
         raise ValueError("Invalid IP address.")
+
+
+def validate_mode(mode: str) -> None:
+    if not mode in {"live", "padns"}:
+        raise ValueError("Mode must be either live or padns.")
+
+
+def validate_match(match: str) -> None:
+    if not match in {"self", "full"}:
+        raise ValueError("Match must be either self or full.")
+
+
+def validate_as_of(as_of: str | int, mode: str) -> None:
+    if not mode == "padns":
+        raise ValueError("When passing as_of, mode must be padns.")
+    if isinstance(as_of, str):
+        try:
+            datetime.date.fromisoformat(as_of)
+        except ValueError:
+            raise ValueError("as_of must be in iso date format, YYYY-MM-DD.")
